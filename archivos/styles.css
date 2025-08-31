@@ -11,7 +11,7 @@
 /* === FUENTES LOCALES === */
 @font-face {
   font-family: "Inter";
-  src: url("fonts/Inter-Regular.woff2") format("woff2");
+  src: url("/LENGUAJE_DE_MARCAS/fonts/Inter18pt-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("fonts/Inter-Bold.woff2") format("woff2");
+  src: url("/LENGUAJE_DE_MARCAS/fonts/Inter-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
   font-family: "Righteous";
-  src: url("fonts/Righteous-Regular.woff2") format("woff2");
+  src: url("/LENGUAJE_DE_MARCAS/fonts/Righteous-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
