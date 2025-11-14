@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <book>
+    <title>La sombra del viento</title>
+    <author>Carlos Ruiz Zafón</author>
+    <year>2001</year>
+    <publisher>Planeta</publisher>
+    <pages>352</pages>
+  </book>
+
+  <book>
+    <title>Effective Java</title>
+    <author>Joshua Bloch</author>
+    <year>2018</year>
+    <publisher>Addison-Wesley</publisher>
+    <pages>416</pages>
+  </book>
+</library>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Fecha AAAA-MM-DD -->
+  <xs:simpleType name="tFecha">
+    <xs:restriction base="xs:date"/>
+  </xs:simpleType>
+
+  <!-- Año en 4 dígitos -->
+  <xs:simpleType name="tAnio">
+    <xs:restriction base="xs:gYear"/>
+  </xs:simpleType>
+
+  <!-- ISBN de 13 dígitos -->
+  <xs:simpleType name="tISBN">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{13}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ISSN tipo 1234-567X -->
+  <xs:simpleType name="tISSN">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{4}-[0-9]{3}[0-9X]"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ORCID tipo 0000-0002-1825-0097 -->
+  <xs:simpleType name="tORCID">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Email -->
+  <xs:simpleType name="tEmail">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^@]+@[^@]+\.[^@]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Categorías de libro -->
+  <xs:simpleType name="tCategoriaLibro">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="novela"/>
+      <xs:enumeration value="tecnico"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo de usuario -->
+  <xs:simpleType name="tTipoUsuario">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="alumno"/>
+      <xs:enumeration value="profesor"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Estado del préstamo -->
+  <xs:simpleType name="tEstadoPrestamo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="devuelto"/>
+      <xs:enumeration value="en_curso"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Páginas > 0 -->
+  <xs:simpleType name="tPaginas">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <!-- ELEMENTO RAÍZ -->
+
+  <xs:element name="catalogo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="libros">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="libro" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="titulo" type="xs:string"/>
+                    <xs:element name="anio" type="tAnio"/>
+                    <xs:element name="autores">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="autor" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="nombre" type="xs:string"/>
+                                <xs:element name="orcid" type="tORCID" minOccurs="0"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="etiquetas" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="etiqueta" type="xs:string" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:ID" use="required"/>
+                  <xs:attribute name="categoria" type="tCategoriaLibro" use="required"/>
+                  <xs:attribute name="isbn" type="tISBN" use="required"/>
+                  <xs:attribute name="paginas" type="tPaginas" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="revistas">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="revista" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="titulo" type="xs:string"/>
+                    <xs:element name="anio" type="tAnio"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:ID" use="required"/>
+                  <xs:attribute name="area" type="xs:string" use="required"/>
+                  <xs:attribute name="issn" type="tISSN" use="required"/>
+                  <xs:attribute name="numero" type="xs:integer" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="usuarios">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="usuario" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="nombre" type="xs:string"/>
+                    <xs:element name="email" type="tEmail"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:ID" use="required"/>
+                  <xs:attribute name="tipo" type="tTipoUsuario" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="prestamos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="prestamo" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="fecha_inicio" type="tFecha"/>
+                    <xs:element name="fecha_fin" type="tFecha" minOccurs="0"/>
+                    <xs:element name="estado" type="tEstadoPrestamo"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:ID" use="required"/>
+                  <xs:attribute name="itemRef" type="xs:IDREF" use="required"/>
+                  <xs:attribute name="usuarioRef" type="xs:IDREF" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+
+      <xs:attribute name="fecha" type="tFecha" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plataforma fecha_publicacion="2025-10-15">
+  <cursos>
+    <curso id="C1" codigo="LM-XML-01">
+      <titulo>Lenguajes de marcas: XML</titulo>
+      <nivel>Básico</nivel>
+      <modalidad>online</modalidad>
+      <horas>40</horas>
+      <modulos>
+        <modulo clave="M1">
+          <nombre>Introducción a XML</nombre>
+          <horas>10</horas>
+        </modulo>
+        <modulo clave="M2">
+          <nombre>DTD y validación</nombre>
+          <horas>15</horas>
+        </modulo>
+      </modulos>
+    </curso>
+
+    <curso id="C2">
+      <titulo>XML Schema</titulo>
+      <nivel>Avanzado</nivel>
+      <modalidad>presencial</modalidad>
+      <horas>30</horas>
+    </curso>
+  </cursos>
+
+  <alumnos>
+    <alumno id="A1" nif="12345678A">
+      <nombre>Ana López</nombre>
+      <email>ana@example.com</email>
+      <telefono>600123123</telefono>
+    </alumno>
+    <alumno id="A2">
+      <nombre>Carlos Pérez</nombre>
+      <email>carlos@example.com</email>
+    </alumno>
+  </alumnos>
+
+  <matriculas>
+    <matricula id="M1" alumnoRef="A1" cursoRef="C1">
+      <fecha_alta>2025-09-01</fecha_alta>
+      <estado>activa</estado>
+    </matricula>
+    <matricula id="M2" alumnoRef="A2" cursoRef="C2">
+      <fecha_alta>2025-09-10</fecha_alta>
+      <estado>activa</estado>
+    </matricula>
+  </matriculas>
+
+  <evaluaciones>
+    <evaluacion id="E1" matriculaRef="M1">
+      <instrumento>Examen final</instrumento>
+      <convocatoria>Ordinaria</convocatoria>
+      <nota>8.5</nota>
+    </evaluacion>
+    <evaluacion id="E2" matriculaRef="M2">
+      <instrumento>Proyecto</instrumento>
+      <convocatoria>Ordinaria</convocatoria>
+      <nota>9.0</nota>
+    </evaluacion>
+  </evaluaciones>
+</plataforma>
